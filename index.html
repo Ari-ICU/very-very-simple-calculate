@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Calculator</title>
+  </head>
+  <body>
+    <div class="container mx-auto flex justify-center items-center h-screen">
+      <div
+        class="max-w-[1000px] p-10 border border-black bg-gray-800 rounded-lg shadow-md"
+      >
+        <form id="calculator-form" class="space-y-4">
+          <input
+            type="text"
+            id="value1"
+            class="w-full rounded-sm p-2 text-lg text-black"
+            placeholder="0"
+          />
+          <input
+            type="text"
+            id="value2"
+            class="w-full rounded-sm p-2 text-lg text-black"
+            placeholder="0"
+          />
+
+          <!-- Buttons -->
+          <div class="grid grid-cols-4 *:py-4 *:px-5 gap-4">
+            <!-- Operators -->
+            <button
+              type="button"
+              class="bg-[#bd8c24] shadow hover:shadow-orange-500 hover:scale-95 duration-700 text-white rounded"
+              aria-label="Multiply"
+              data-value="+"
+            >
+              +
+            </button>
+            <button
+              type="button"
+              class="bg-[#bd8c24] shadow hover:shadow-orange-500 hover:scale-95 duration-700 text-white rounded"
+              aria-label="Divide"
+              data-value="-"
+            >
+              -
+            </button>
+            <button
+              type="button"
+              class="bg-[#bd8c24] shadow hover:shadow-orange-500 hover:scale-95 duration-700 text-white rounded"
+              aria-label="Subtract"
+              data-value="*"
+            >
+              *
+            </button>
+            <button
+              type="button"
+              class="bg-[#bd8c24] shadow hover:shadow-orange-500 hover:scale-95 duration-700 text-white rounded"
+              aria-label="Add"
+              data-value="/"
+            >
+              /
+            </button>
+            <p class="text-white w-full">result : <span id="results"></span></p>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+      const myCal = (op) => {
+        const value1 = parseFloat(document.getElementById("value1").value) || 0;
+        const value2 = parseFloat(document.getElementById("value2").value) || 0;
+        const resultElement = document.getElementById("results");
+
+        var result;
+
+        switch (op) {
+          case "+":
+            result = value1 + value2;
+            break;
+          case "-":
+            result = value1 - value2;
+            break;
+          case "*":
+            result = value1 * value2;
+            break;
+          case "/":
+            result = value1 / value2;
+            break;
+          default:
+            result = "Invalid operation";
+        }
+        resultElement.textContent = result;
+        console.log(result);
+      };
+
+      const buttons = document.querySelectorAll("button");
+      buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const operator = button.getAttribute("data-value");
+          myCal(operator);
+        });
+      });
+    </script>
+  </body>
+</html>
